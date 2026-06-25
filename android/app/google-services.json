@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "182986641563",
+    "project_id": "driverhub-422e2",
+    "storage_bucket": "driverhub-422e2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182986641563:android:a1e4c5e7bd3941d939b63e",
+        "android_client_info": {
+          "package_name": "com.oyunbat.driverhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX4kMS-lLjR3N8a2daar1vi5uyjKHnvjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
