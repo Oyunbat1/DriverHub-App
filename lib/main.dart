@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-// import 'app/service/mock_date_service.dart';
+import 'app/service/mock_data_service.dart';
 import 'app/routes/app_pages.dart';
 import 'app/service/auth_service.dart';
 
@@ -11,7 +11,7 @@ Future<void> main() async {
 
 
   await Get.putAsync<AuthService>(() async => AuthService());
-  // Get.put<MockDataService>(MockDataService());
+  Get.put<MockDataService>(MockDataService());
   runApp(const DriverHubApp());
 }
 

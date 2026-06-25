@@ -26,6 +26,13 @@ class MockDataService extends GetxService {
         'to': 'UB Tower',
         'price': 8000,
       },
+      <String, dynamic>{
+        'id': '104',
+        'title': 'Short Sight Seeing',
+        'from': 'Zaisan Tolgoi',
+        'to': 'Chingis Muzei',
+        'price': 12000,
+      },
     ];
   }
 

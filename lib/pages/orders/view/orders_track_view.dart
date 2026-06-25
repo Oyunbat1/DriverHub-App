@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-class OrdersTrackView  extends StatelessWidget {
+import '../suite/orders_pages.dart';
+
+class OrdersTrackView extends StatelessWidget {
 
   const OrdersTrackView({super.key});
 
@@ -19,9 +21,10 @@ class OrdersTrackView  extends StatelessWidget {
             const SizedBox(height: 16),
             const Text('Driving to destination...'),
             const SizedBox(height: 24),
-            // ElevatedButton(
-            //   child: const Text('Finish & back to orders'),
-            // ),
+            ElevatedButton(
+              onPressed: OrdersPages.backToList,
+              child: const Text('Finish & back to orders'),
+            ),
           ],
         ),
       ),
