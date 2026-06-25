@@ -65,5 +65,6 @@ abstract class AppPages {
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
+    // GetPage(name: Routes.ordersList, page: OrderDetailView(), binding: OrderBinding() ),
   ];
 }

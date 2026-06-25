@@ -30,12 +30,8 @@ class HomeView extends GetView<HomeLogic> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Icon(Icons.check_circle, size: 72, color: Colors.green),
+
             const SizedBox(height: 16),
-            const Text(
-              'Welcome, driver!',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
             const SizedBox(height: 8),
             Obx(() => Text('Signed in as: ${controller.state.driverLabel.value}')),
           ],
