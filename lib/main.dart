@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
-void main() async {
+import 'app/routes/app_pages.dart';
+import 'app/service/auth_service.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+
+
+  await Get.putAsync<AuthService>(() async => AuthService());
+
+  runApp(const DriverHubApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DriverHubApp extends StatelessWidget {
+  const DriverHubApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +25,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: Scaffold(
-        appBar: AppBar(title: const Text("Test")),
-        body: const Center(
-          child: Text('Hello'),
-        ),
-      ),
+      initialRoute: AppPages.initial,
+      getPages: AppPages.routes,
     );
   }
 }
