@@ -5,26 +5,11 @@ import '../logic/register_logic.dart';
 import '../suite/register_pages.dart';
 
 
-class RegisterPhoneView extends StatefulWidget {
+class RegisterPhoneView extends GetView<RegisterLogic> {
   const RegisterPhoneView({super.key});
 
-  @override
-  State<RegisterPhoneView> createState() => _RegisterPhoneViewState();
-}
-
-class _RegisterPhoneViewState extends State<RegisterPhoneView> {
-
-  final RegisterLogic controller = Get.find<RegisterLogic>();
-  final TextEditingController _phoneCtrl = TextEditingController();
-
-  @override
-  void dispose() {
-    _phoneCtrl.dispose();
-    super.dispose();
-  }
-
   Future<void> _onNext() async {
-    controller.setPhone(_phoneCtrl.text);
+    controller.setPhone(controller.phoneCtrl.text);
     final bool sent = await controller.sendOtp();
     if (sent) {
       RegisterPages.toOtp();
@@ -48,7 +33,7 @@ class _RegisterPhoneViewState extends State<RegisterPhoneView> {
             const Text('Enter your phone number'),
             const SizedBox(height: 16),
             TextField(
-              controller: _phoneCtrl,
+              controller: controller.phoneCtrl,
               keyboardType: TextInputType.phone,
               decoration: const InputDecoration(
                 labelText: 'Phone (+976...)',

@@ -6,26 +6,11 @@ import '../logic/register_logic.dart';
 import '../suite/register_pages.dart';
 
 
-class RegisterOtpView extends StatefulWidget {
+class RegisterOtpView extends GetView<RegisterLogic> {
   const RegisterOtpView({super.key});
 
-  @override
-  State<RegisterOtpView> createState() => _RegisterOtpViewState();
-}
-
-class _RegisterOtpViewState extends State<RegisterOtpView> {
-
-  final RegisterLogic controller = Get.find<RegisterLogic>();
-  final TextEditingController _codeCtrl = TextEditingController();
-
-  @override
-  void dispose() {
-    _codeCtrl.dispose();
-    super.dispose();
-  }
-
   Future<void> _onVerify() async {
-    final bool ok = await controller.verifyOtp(_codeCtrl.text);
+    final bool ok = await controller.verifyOtp(controller.codeCtrl.text);
     if (ok) {
       RegisterPages.toInfo();
     } else {
@@ -54,7 +39,7 @@ class _RegisterOtpViewState extends State<RegisterOtpView> {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: _codeCtrl,
+              controller: controller.codeCtrl,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 labelText: '6-digit code',

@@ -4,25 +4,11 @@ import 'package:get/get.dart';
 import '../logic/auth_logic.dart';
 import '../suite/auth_pages.dart';
 
-class ForgotPasswordView extends StatefulWidget {
+class ForgotPasswordView extends GetView<AuthLogic> {
   const ForgotPasswordView({super.key});
 
-  @override
-  State<ForgotPasswordView> createState() => _ForgotPasswordViewState();
-}
-
-class _ForgotPasswordViewState extends State<ForgotPasswordView> {
-  final AuthLogic controller = Get.find<AuthLogic>();
-  final TextEditingController _emailCtrl = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailCtrl.dispose();
-    super.dispose();
-  }
-
   Future<void> _onSendPressed() async {
-    final bool ok = await controller.sendReset(_emailCtrl.text);
+    final bool ok = await controller.sendReset(controller.emailCtrl.text);
     if (ok) {
       Get.snackbar(
         'Email sent',
@@ -51,7 +37,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
             const Text('Enter your email and we will send a reset link.'),
             const SizedBox(height: 16),
             TextField(
-              controller: _emailCtrl,
+              controller: controller.emailCtrl,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: 'Email',

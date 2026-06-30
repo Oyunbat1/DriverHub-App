@@ -4,35 +4,14 @@ import 'package:get/get.dart';
 import '../logic/register_logic.dart';
 import '../suite/register_pages.dart';
 
-// STEP 3 of 5: personal info + the email/password the real account is made with.
-class RegisterInfoView extends StatefulWidget {
+class RegisterInfoView extends GetView<RegisterLogic> {
   const RegisterInfoView({super.key});
 
-  @override
-  State<RegisterInfoView> createState() => _RegisterInfoViewState();
-}
-
-class _RegisterInfoViewState extends State<RegisterInfoView> {
-  final RegisterLogic controller = Get.find<RegisterLogic>();
-  final TextEditingController _nameCtrl = TextEditingController();
-  final TextEditingController _licenseCtrl = TextEditingController();
-  final TextEditingController _emailCtrl = TextEditingController();
-  final TextEditingController _passwordCtrl = TextEditingController();
-
-  @override
-  void dispose() {
-    _nameCtrl.dispose();
-    _licenseCtrl.dispose();
-    _emailCtrl.dispose();
-    _passwordCtrl.dispose();
-    super.dispose();
-  }
-
   void _onNext() {
-    final bool anyEmpty = _nameCtrl.text.trim().isEmpty ||
-        _licenseCtrl.text.trim().isEmpty ||
-        _emailCtrl.text.trim().isEmpty ||
-        _passwordCtrl.text.isEmpty;
+    final bool anyEmpty = controller.nameCtrl.text.trim().isEmpty ||
+        controller.licenseCtrl.text.trim().isEmpty ||
+        controller.emailCtrl.text.trim().isEmpty ||
+        controller.passwordCtrl.text.isEmpty;
     if (anyEmpty) {
       Get.snackbar(
         'Missing info',
@@ -42,7 +21,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
       return;
     }
     // Firebase requires passwords of at least 6 characters.
-    if (_passwordCtrl.text.length < 6) {
+    if (controller.passwordCtrl.text.length < 6) {
       Get.snackbar(
         'Weak password',
         'Password must be at least 6 characters.',
@@ -51,10 +30,10 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
       return;
     }
     controller.setInfo(
-      _nameCtrl.text,
-      _licenseCtrl.text,
-      _emailCtrl.text,
-      _passwordCtrl.text,
+      controller.nameCtrl.text,
+      controller.licenseCtrl.text,
+      controller.emailCtrl.text,
+      controller.passwordCtrl.text,
     );
     RegisterPages.toPhoto();
   }
@@ -68,7 +47,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
         child: ListView(
           children: <Widget>[
             TextField(
-              controller: _nameCtrl,
+              controller: controller.nameCtrl,
               decoration: const InputDecoration(
                 labelText: 'Full name',
                 border: OutlineInputBorder(),
@@ -76,7 +55,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: _licenseCtrl,
+              controller: controller.licenseCtrl,
               decoration: const InputDecoration(
                 labelText: 'Driver license number',
                 border: OutlineInputBorder(),
@@ -84,7 +63,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: _emailCtrl,
+              controller: controller.emailCtrl,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: 'Email',
@@ -93,7 +72,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: _passwordCtrl,
+              controller: controller.passwordCtrl,
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Password (min 6 chars)',

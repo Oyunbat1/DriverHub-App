@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 
-class MockDataService extends GetxService {
+class MockDataService  {
   Future<List<Map<String, dynamic>>> fetchOrders() async {
     await Future<void>.delayed(const Duration(milliseconds: 400));
     return <Map<String, dynamic>>[

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../logic/splash_logic.dart';
+import 'splash_logic.dart';
 
 
 class SplashBinding extends Bindings {

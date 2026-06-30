@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../../app/service/auth_service.dart';
 import '../state/register_state.dart';
@@ -8,6 +9,25 @@ class RegisterLogic extends GetxController {
   final RegisterState state = RegisterState();
   final AuthService _auth = Get.find<AuthService>();
 
+  // One shared logic instance spans the whole wizard, so the text controllers
+  // live here and the step views can stay stateless (GetView).
+  final TextEditingController phoneCtrl = TextEditingController();
+  final TextEditingController codeCtrl = TextEditingController();
+  final TextEditingController nameCtrl = TextEditingController();
+  final TextEditingController licenseCtrl = TextEditingController();
+  final TextEditingController emailCtrl = TextEditingController();
+  final TextEditingController passwordCtrl = TextEditingController();
+
+  @override
+  void onClose() {
+    phoneCtrl.dispose();
+    codeCtrl.dispose();
+    nameCtrl.dispose();
+    licenseCtrl.dispose();
+    emailCtrl.dispose();
+    passwordCtrl.dispose();
+    super.onClose();
+  }
 
   void setPhone(String phone) {
     final String cleaned = phone.replaceAll(RegExp(r'[\s-]'), '');
@@ -51,7 +71,7 @@ class RegisterLogic extends GetxController {
     }
 
     await Future<void>.delayed(const Duration(milliseconds: 600));
-    _auth.saveDriverProfile(<String, dynamic>{
+    await _auth.saveDriverProfile(<String, dynamic>{
       'name': state.name.value,
       'phone': state.phone.value,
       'license': state.license.value,

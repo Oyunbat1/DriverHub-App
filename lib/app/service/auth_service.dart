@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 
 class AuthService extends GetxService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
 
   static const String demoSmsCode = '111123';
@@ -12,8 +14,27 @@ class AuthService extends GetxService {
 
   Map<String, dynamic> driverProfile = <String, dynamic>{};
 
-  void saveDriverProfile(Map<String, dynamic> profile) {
+  Future<void> saveDriverProfile(Map<String, dynamic> profile) async {
     driverProfile = profile;
+    final String? uid = _auth.currentUser?.uid;
+    if (uid == null) {
+      return;
+    }
+    await _db
+        .collection('drivers')
+        .doc(uid)
+        .set(profile, SetOptions(merge: true));
+  }
+
+  Future<Map<String, dynamic>> fetchDriverProfile() async {
+    final String? uid = _auth.currentUser?.uid;
+    if (uid == null) {
+      return <String, dynamic>{};
+    }
+    final DocumentSnapshot<Map<String, dynamic>> snap =
+        await _db.collection('drivers').doc(uid).get();
+    driverProfile = snap.data() ?? <String, dynamic>{};
+    return driverProfile;
   }
 
   Future<bool> signInEmail(String email, String password) async {

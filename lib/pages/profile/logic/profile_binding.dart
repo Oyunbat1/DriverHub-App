@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../logic/profile_logic.dart';
+import 'profile_logic.dart';
 
 class ProfileBinding extends Bindings {
   @override

@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import '../logic/register_logic.dart';
 import '../suite/register_pages.dart';
 
-class RegisterPhotoView extends StatelessWidget {
+class RegisterPhotoView extends GetView<RegisterLogic> {
   const RegisterPhotoView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final RegisterLogic controller = Get.find<RegisterLogic>();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Register · Step 4/5')),

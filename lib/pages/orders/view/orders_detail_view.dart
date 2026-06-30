@@ -4,12 +4,12 @@ import 'package:driverhub/pages/orders/suite/orders_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OrdersDetailView  extends StatelessWidget{
+class OrdersDetailView  extends GetView<OrdersLogic>{
   const OrdersDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final OrdersLogic controller = Get.find<OrdersLogic>();
+
     final String id = Get.parameters['id'] ?? '';
 
     return Scaffold(

@@ -27,8 +27,8 @@ Every feature lives in `lib/pages/<feature>/` with exactly four folders. This se
 | Folder | Contains | Hard rule |
 |---|---|---|
 | `state/` | a plain class of `Rx` fields only | no methods, no logic, no `Get.*` |
-| `logic/` | a `GetxController` owning a `<Feature>State` | does work + mutates state; **never** navigates, **never** shows popups; returns `bool`/values |
-| `suite/` | `<Feature>Binding` + `<Feature>Pages` | `Pages` is the **only** place `Get.*` navigation is allowed |
+| `logic/` | a `<Feature>Controller` owning a `<Feature>State`, plus the `<Feature>Binding` | controller does work + mutates state; **never** navigates, **never** shows popups; returns `bool`/values. Binding just `Get.put`/`lazyPut`s the controller |
+| `suite/` | `<Feature>Pages` | `Pages` is the **only** place `Get.*` navigation is allowed |
 | `view/` | widgets | display only; reads results, calls `<Feature>Pages.*`, shows its own snackbars |
 
 **The flow to preserve:** View tap → `controller.doWork()` (returns bool) → View inspects result → `<Feature>Pages.openNext()` → `Get.toNamed(...)`.

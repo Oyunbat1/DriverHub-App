@@ -4,27 +4,14 @@ import 'package:get/get.dart';
 import '../logic/auth_logic.dart';
 import '../suite/auth_pages.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends GetView<AuthLogic> {
   const LoginView({super.key});
 
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-  final AuthLogic controller = Get.find<AuthLogic>();
-  final TextEditingController _emailCtrl = TextEditingController();
-  final TextEditingController _passCtrl = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailCtrl.dispose();
-    _passCtrl.dispose();
-    super.dispose();
-  }
-
   Future<void> _onLoginPressed() async {
-    final bool ok = await controller.login(_emailCtrl.text, _passCtrl.text);
+    final bool ok = await controller.login(
+      controller.emailCtrl.text,
+      controller.passCtrl.text,
+    );
     if (ok) {
       AuthPages.goHomeFresh();
     } else {
@@ -48,7 +35,7 @@ class _LoginViewState extends State<LoginView> {
             const Icon(Icons.local_taxi, size: 64, color: Colors.deepPurple),
             const SizedBox(height: 24),
             TextField(
-              controller: _emailCtrl,
+              controller: controller.emailCtrl,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: 'Email',
@@ -57,7 +44,7 @@ class _LoginViewState extends State<LoginView> {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: _passCtrl,
+              controller: controller.passCtrl,
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Password',
